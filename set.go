@@ -66,3 +66,52 @@ func (s set[T]) Difference(s2 set[T]) set[T] {
 	}
 	return result
 }
+
+//
+// Checks if two sets are equal or not.
+//
+func (s set[T]) IsEqual(s2 set[T]) bool {
+	if s.Len() != s2.Len() {
+		return false
+	}
+	for item := range s {
+		if _, exist := s2[item]; !exist {
+			return false
+		}
+	}
+	return true
+}
+
+//
+// Checks whether the set "s" and "s2" are disjoint or not.
+//
+func (s set[T]) IsDisjoint(s2 set[T]) bool {
+	if s.Len() == 0 && s2.Len() == 0 {
+		return false
+	}
+	for item := range s {
+		if _, exist := s2[item]; exist {
+			return false
+		}
+	}
+	return true
+}
+
+//
+// Whether the set "s" is a subset of the set "s2". "proper" param
+// indicates if the subset is proper or not.
+//
+func (s set[T]) IsSubsetOf(s2 set[T], proper bool) bool {
+	if s.Len() > s2.Len() {
+		return false
+	}
+	if proper && s.Len() == s2.Len() {
+		return false
+	}
+	for item := range s {
+		if _, exist := s2[item]; !exist {
+			return false
+		}
+	}
+	return true
+}
