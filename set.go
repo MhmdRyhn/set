@@ -27,6 +27,10 @@ func (s *set[T]) Len() int {
 	return s.len
 }
 
+func (s *set[T]) IsEmpty() bool {
+	return s.Len() == 0
+}
+
 func (s *set[T]) Contains(item T) bool {
 	_, exist := s.hashTable[item]
 	return exist

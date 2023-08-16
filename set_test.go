@@ -14,6 +14,14 @@ func TestLen(t *testing.T) {
 	assert.Equal(t, si.Len(), 2)
 }
 
+func TestIsEmpty(t *testing.T) {
+	si := New[int]()
+	assert.True(t, si.IsEmpty())
+
+	si = New(1, 2)
+	assert.False(t, si.IsEmpty())
+}
+
 func TestContains(t *testing.T) {
 	si := New[int]()
 	assert.Equal(t, si.Len(), 0)
