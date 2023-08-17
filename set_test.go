@@ -38,7 +38,7 @@ func TestAdd(t *testing.T) {
 	assert.True(t, si.Contains(1))
 	assert.True(t, si.Contains(2))
 
-	si.Add(3)
+	si.Add(1, 3)
 	assert.Equal(t, si.Len(), 3)
 	assert.True(t, si.Contains(1))
 	assert.True(t, si.Contains(2))
