@@ -22,6 +22,14 @@ func TestIsEmpty(t *testing.T) {
 	assert.False(t, si.IsEmpty())
 }
 
+func TestIsNull(t *testing.T) {
+	si := New[int]()
+	assert.True(t, si.IsNull())
+
+	si = New(1, 2)
+	assert.False(t, si.IsNull())
+}
+
 func TestContains(t *testing.T) {
 	si := New[int]()
 	assert.Equal(t, si.Len(), 0)

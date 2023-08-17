@@ -31,6 +31,11 @@ func (s *set[T]) IsEmpty() bool {
 	return s.Len() == 0
 }
 
+// Identical to `set.IsEmpty()` method
+func (s *set[T]) IsNull() bool {
+	return s.Len() == 0
+}
+
 func (s *set[T]) Contains(item T) bool {
 	_, exist := s.hashTable[item]
 	return exist
