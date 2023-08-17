@@ -38,7 +38,7 @@ func (s *set[T]) Contains(item T) bool {
 
 func (s *set[T]) Add(items ...T) {
 	for _, item := range items {
-		if _, exist := s.hashTable[item]; !exist {
+		if !s.Contains(item) {
 			s.hashTable[item] = void{}
 			s.len++
 		}
@@ -92,7 +92,7 @@ func (s *set[T]) IsEqual(s2 set[T]) bool {
 		return false
 	}
 	for item := range s.hashTable {
-		if _, exist := s2.hashTable[item]; !exist {
+		if !s2.Contains(item) {
 			return false
 		}
 	}
@@ -103,11 +103,11 @@ func (s *set[T]) IsEqual(s2 set[T]) bool {
 // Checks whether the set "s" and "s2" are disjoint or not.
 //
 func (s *set[T]) IsDisjoint(s2 set[T]) bool {
-	if s.Len() == 0 && s2.Len() == 0 {
+	if s.IsEmpty() && s2.IsEmpty() {
 		return false
 	}
 	for item := range s.hashTable {
-		if _, exist := s2.hashTable[item]; exist {
+		if s2.Contains(item) {
 			return false
 		}
 	}
@@ -126,7 +126,7 @@ func (s *set[T]) IsSubsetOf(s2 set[T], proper bool) bool {
 		return false
 	}
 	for item := range s.hashTable {
-		if _, exist := s2.hashTable[item]; !exist {
+		if !s2.Contains(item) {
 			return false
 		}
 	}

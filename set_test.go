@@ -139,6 +139,10 @@ func TestIsSubsetOf(t *testing.T) {
 	ss1 = New("a", "d")
 	ss2 = New("a", "b", "c")
 	assert.False(t, ss1.IsSubsetOf(*ss2, false))
+
+	ss1 = New[string]()
+	ss2 = New[string]()
+	assert.True(t, ss1.IsSubsetOf(*ss2, false))
 }
 
 func TestIsProperSubsetOf(t *testing.T) {
@@ -152,5 +156,9 @@ func TestIsProperSubsetOf(t *testing.T) {
 
 	ss1 = New("a", "d")
 	ss2 = New("a", "b", "c")
+	assert.False(t, ss1.IsSubsetOf(*ss2, true))
+
+	ss1 = New[string]()
+	ss2 = New[string]()
 	assert.False(t, ss1.IsSubsetOf(*ss2, true))
 }
