@@ -55,6 +55,13 @@ func TestAdd(t *testing.T) {
 
 func TestRemove(t *testing.T) {
 	si := New(1, 2, 3)
+
+	si.Remove(5)
+	assert.Equal(t, si.Len(), 3)
+	assert.True(t, si.Contains(1))
+	assert.True(t, si.Contains(2))
+	assert.True(t, si.Contains(3))
+
 	si.Remove(2)
 	assert.Equal(t, si.Len(), 2)
 	assert.True(t, si.Contains(1))

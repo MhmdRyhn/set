@@ -9,6 +9,11 @@ type set[T comparable] struct {
 	len       int
 }
 
+//
+// This constructor function never returns a nil pointer.
+// If the set is initialized with no item(s), pointer to
+// an empty/null set is returned.
+//
 func New[T comparable](items ...T) *set[T] {
 	s := set[T]{
 		hashTable: map[T]void{},
@@ -31,7 +36,9 @@ func (s *set[T]) IsEmpty() bool {
 	return s.Len() == 0
 }
 
+//
 // Identical to `set.IsEmpty()` method
+//
 func (s *set[T]) IsNull() bool {
 	return s.Len() == 0
 }
@@ -51,14 +58,16 @@ func (s *set[T]) Add(items ...T) {
 }
 
 func (s *set[T]) Remove(item T) {
-	delete(s.hashTable, item)
-	s.len--
+	if s.Contains(item) {
+		delete(s.hashTable, item)
+		s.len--
+	}
 }
 
 func (s *set[T]) Members() []T {
 	var members []T
-	for v := range s.hashTable {
-		members = append(members, v)
+	for item := range s.hashTable {
+		members = append(members, item)
 	}
 	return members
 }
